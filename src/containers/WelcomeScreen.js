@@ -2,10 +2,18 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
-  View
+  View,
+  Button
 } from 'react-native';
 
+import { Navigation } from 'react-native-navigation';
+
 export default class WelcomeScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.onClickPushMe = this.onClickPushMe.bind(this);
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -19,8 +27,15 @@ export default class WelcomeScreen extends Component {
           Press Cmd+R to reload,{'\n'}
           Cmd+D or shake for dev menu
         </Text>
+        <Button title="Push me" onPress={this.onClickPushMe} />
       </View>
     );
+  }
+
+  onClickPushMe() {
+    this.props.navigator.push({
+      screen: 'com.example.WelcomeScreen'
+    });
   }
 }
 
