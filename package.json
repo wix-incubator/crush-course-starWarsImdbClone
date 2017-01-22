@@ -10,9 +10,9 @@
 		"react": "15.4.1",
 		"react-native": "0.38.0",
 		"react-native-navigation": "next",
-		"redux": "latest",
-		"redux-thunk": "latest",
-		"react-redux": "latest"
+		"redux": "3.x.x",
+		"redux-thunk": "1.x.x",
+		"react-redux": "4.x.x"
 	},
 	"devDependencies": {
 		"babel-jest": "18.0.0",

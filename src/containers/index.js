@@ -1,7 +1,6 @@
 import WelcomeScreen from './WelcomeScreen';
-import Provider from 'react-redux';
 import { Navigation } from 'react-native-navigation';
 
-export function registerScreens(store) {
+export function registerScreens(store, Provider) {
   Navigation.registerComponent('com.example.WelcomeScreen', () => WelcomeScreen, store, Provider);
 }

@@ -2,15 +2,15 @@
 import { Navigation } from 'react-native-navigation';
 import { registerScreens } from './containers';
 
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
 
-const reducer = (state, actions) => store;
-
-const store = createStore(reducer, undefined, thunk);
+import * as reducers from './stores/reducers';
+const store = createStore(combineReducers(reducers), applyMiddleware(thunk));
 
 export function start() {
-  registerScreens(store);
+  registerScreens(store, Provider);
 
   Navigation.startTabBasedApp({
     tabs: [

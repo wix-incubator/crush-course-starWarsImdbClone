@@ -6,9 +6,9 @@ import {
   Button
 } from 'react-native';
 
-import { Navigation } from 'react-native-navigation';
+import { connect } from 'react-redux';
 
-export default class WelcomeScreen extends Component {
+class WelcomeScreen extends Component {
   constructor(props) {
     super(props);
     this.onClickPushMe = this.onClickPushMe.bind(this);
@@ -21,7 +21,7 @@ export default class WelcomeScreen extends Component {
           Welcome to React Native!
         </Text>
         <Text style={styles.instructions}>
-          To get started, edit index.ios.js
+          {this.props.name}
         </Text>
         <Text style={styles.instructions}>
           Press Cmd+R to reload,{'\n'}
@@ -38,6 +38,14 @@ export default class WelcomeScreen extends Component {
     });
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    name: state.myReducer.name
+  };
+}
+
+export default connect(mapStateToProps)(WelcomeScreen);
 
 const styles = StyleSheet.create({
   container: {
