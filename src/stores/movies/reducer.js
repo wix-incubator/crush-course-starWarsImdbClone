@@ -18,6 +18,5 @@ export default function reduce(state = initialState, action) {
 }
 
 export async function getMoviesList() {
-    const movies = await moviesService.getDefaultMovies();
-    return movies;
+    return await moviesService.getDefaultMovies();
 }

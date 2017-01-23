@@ -22,11 +22,12 @@ class WelcomeScreen extends Component {
 
     componentDidMount() {
         this.props.dispatch(movieActions.fetchMovieList());
-        if (this.props.movies) {
-            this.setState({
-                dataSource: ds.cloneWithRows(this.props.movies)
-            });
-        }
+    }
+
+    componentWillReceiveProps(props) {
+        this.setState({
+            dataSource: ds.cloneWithRows(props.movies)
+        });
     }
 
     render() {
@@ -36,7 +37,10 @@ class WelcomeScreen extends Component {
                 <Text style={styles.welcome}>
                     Welcome
                 </Text>
-
+                <ListView
+                    dataSource={this.state.dataSource}
+                    renderRow={(rowData) => <Text>{rowData.original_title}</Text>}
+                />
                 <Text style={styles.instructions}>
                     Press Cmd+R to reload,{'\n'}
                     Cmd+D or shake for dev menu
@@ -60,7 +64,7 @@ class WelcomeScreen extends Component {
 }
 
 function mapStateToProps(state) {
-    const mappedMovies = _.keyBy(state.movies.movies, 'id');
+    const mappedMovies = _.keyBy(state.movies.movies, 'id')
     return {
         movies: mappedMovies
     };
