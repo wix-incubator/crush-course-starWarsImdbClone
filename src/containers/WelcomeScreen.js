@@ -4,6 +4,7 @@ import {
     Text,
     View,
     ListView,
+    Image,
     Button
 } from 'react-native';
 import { connect } from 'react-redux';
@@ -34,18 +35,22 @@ class WelcomeScreen extends Component {
         if (!this.props.movies) return this.renderLoading();
         return (
             <View style={styles.container}>
-                <Text style={styles.welcome}>
-                    Welcome
-                </Text>
                 <ListView
                     dataSource={this.state.dataSource}
-                    renderRow={(rowData) => <Text>{rowData.original_title}</Text>}
+                    renderRow={this._renderRow.bind(this)}
                 />
-                <Text style={styles.instructions}>
-                    Press Cmd+R to reload,{'\n'}
-                    Cmd+D or shake for dev menu
-                </Text>
                 <Button title="Push me" onPress={this.onClickPushMe}/>
+            </View>
+        );
+    }
+
+    _renderRow(rowData) {
+        let imageUri = `https://image.tmdb.org/t/p/w500${rowData.poster_path}`;
+        return (
+            <View>
+                <Image source={{uri: imageUri}} style={{width: 100, height: 100}} />
+                <Text>{imageUri}</Text>
+                <Text>{rowData.original_title}</Text>
             </View>
         );
     }
